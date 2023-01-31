@@ -10,4 +10,7 @@ public static class GameTags
     public const string StopCollider = "StopCollider";
     public const string Obstacle = "Obstacle";
     public const string ObstacleDestroyer = "ObstacleDestroyer";
+    public const string Projectile = "Projectile";
+
+    public const string Untagged = "Untagged";
 }

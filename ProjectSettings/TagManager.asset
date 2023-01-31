@@ -9,6 +9,7 @@ TagManager:
   - StopCollider
   - Obstacle
   - ObstacleDestroyer
+  - Projectile
   layers:
   - Default
   - TransparentFX

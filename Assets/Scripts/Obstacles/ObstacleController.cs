@@ -32,6 +32,9 @@ public class ObstacleController : MonoBehaviour
 
     public void MoveObstacles()
     {
+        if(_obstacles.Count == 0) 
+            return;
+
         foreach (var obstacle in _obstacles)
         {
             obstacle.GetComponent<TileMover>().MoveTile();
@@ -40,9 +43,12 @@ public class ObstacleController : MonoBehaviour
 
     public void StopObstacles()
     {
+        if (_obstaclesInScene.Count == 0 || _obstaclesInScene == null)
+            return;
+
         foreach (var obstacle in _obstaclesInScene)
         {
-            obstacle.GetComponent<TileMover>().StopTile();
+            obstacle?.GetComponent<TileMover>()?.StopTile();
         }
     }
 

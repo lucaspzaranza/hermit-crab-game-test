@@ -21,6 +21,12 @@ public class PlayerAnimatorHashes
 
     private int _death = Animator.StringToHash("Death");
     public int Death => _death;
+
+    private int _shoot = Animator.StringToHash("Shoot");
+    public int Shoot => _shoot;
+
+    private int _landed = Animator.StringToHash("Landed");
+    public int Landed => _landed;
 }
 
 public class Player : MonoBehaviour
@@ -42,6 +48,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float _originMinDistance;
     [SerializeField] private bool _canJump = true;
     [SerializeField] private bool _isRunning = true;
+    [SerializeField] private GameObject _shotPrefab;
+    [SerializeField] private Transform _shootTransform;
 
     private Rigidbody2D _rb;
     private Collider2D _stopCollider;
@@ -91,11 +99,13 @@ public class Player : MonoBehaviour
     {
         _canJump = false;
         _anim.SetTrigger(_animHashes.Jump);
+        _anim.SetBool(_animHashes.Landed, false);
         _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
     }
 
     public void Dash()
     {
+        // Scaling down the collider for the player be able to pass trough smaller paths
         _playerColliderOriginalSize = _playerCollider.size;
         _playerColliderOriginalOffset = _playerCollider.offset;
 
@@ -109,6 +119,12 @@ public class Player : MonoBehaviour
 
         _anim.SetBool(_animHashes.Stop, false);
         _anim.SetTrigger(_animHashes.Dash);
+    }
+
+    public void Shoot()
+    {
+        _anim.SetTrigger(_animHashes.Shoot);
+        GameObject newShot = Instantiate(_shotPrefab, _shootTransform.position, Quaternion.identity); 
     }
 
     public void EndDash()
@@ -167,6 +183,9 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == GameTags.Floor || collision.gameObject.tag == GameTags.Obstacle)
+        {
+            _anim.SetBool(_animHashes.Landed, true);
             _canJump = true;
+        }
     }
 }

@@ -60,6 +60,7 @@ public class GameController : MonoBehaviour
         TileCollisionDetector.OnTileDamagePlayer += DamagePlayer;
         TileCollisionDetector.OnTileStopPlayer += SetStopPlayer;
         TileCollisionDetector.OnObstacleDestroyed += HandleOnObstacleDestroyed;
+        TileCollisionDetector.OnProjectileDestroyed += HandleOnProjectileDestroyed;
 
         ObstacleSpawnable.OnTileEnabled += HandleOnObstacleTileEnabled;
 
@@ -80,6 +81,7 @@ public class GameController : MonoBehaviour
         TileCollisionDetector.OnTileDamagePlayer -= DamagePlayer;
         TileCollisionDetector.OnTileStopPlayer -= SetStopPlayer;
         TileCollisionDetector.OnObstacleDestroyed -= HandleOnObstacleDestroyed;
+        TileCollisionDetector.OnProjectileDestroyed -= HandleOnProjectileDestroyed;
 
         ObstacleSpawnable.OnTileEnabled -= HandleOnObstacleTileEnabled;
 
@@ -145,12 +147,18 @@ public class GameController : MonoBehaviour
 
     private void HandleOnObstacleDestroyed(GameObject obstacle)
     {
+        _obstacleController.RemoveObstacleFromList(obstacle);
+    }
 
+    private void HandleOnProjectileDestroyed(GameObject obstacle)
+    {
+        Projectile projectileComponent = obstacle.GetComponent<Projectile>();
+        projectileComponent.StartDestroyAnimation();
     }
 
     private void HandleClickOrTouch()
     {
-        print("Click or touch. FIRE!");
+        PlayerInstance.Shoot();
     }
 
     private void HandleOnSwipeUp()

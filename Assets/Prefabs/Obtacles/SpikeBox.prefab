@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6231666409479009376}
   m_Layer: 0
   m_Name: SpikeBox
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,8 +152,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _causesDamage: 0
+  _destructible: 0
   _canStopPlayer: 0
   _damageAmount: 0
+  _health: 0
 --- !u!1 &6231666410854444163
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,5 +279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _causesDamage: 1
+  _destructible: 0
   _canStopPlayer: 0
   _damageAmount: 30
+  _health: 0

@@ -9,8 +9,17 @@ public class ObstacleSpawnable : MonoBehaviour
 
     [SerializeField] private Transform _obstacleSpawnTransform;
 
+    private bool _firstEnable = true;
+
     private void OnEnable()
     {
-        OnTileEnabled?.Invoke(_obstacleSpawnTransform);
+        // It'll prevent obstacle spawning right at the start of the game.
+        if(!_firstEnable)
+            OnTileEnabled?.Invoke(_obstacleSpawnTransform);
+    }
+
+    private void OnDisable()
+    {
+        _firstEnable = false;
     }
 }

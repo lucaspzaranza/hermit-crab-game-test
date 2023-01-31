@@ -103,7 +103,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 9c1a42bbbc028ef489a0cd78478b414f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0.72156864}
   m_FlipX: 0
@@ -180,8 +180,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _causesDamage: 1
+  _destructible: 0
   _canStopPlayer: 0
   _damageAmount: 20
+  _health: 0
 --- !u!1 &2237708972673945388
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,8 +376,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _causesDamage: 0
+  _destructible: 0
   _canStopPlayer: 0
   _damageAmount: 0
+  _health: 0
 --- !u!114 &5444359771676175216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,8 +547,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _causesDamage: 0
+  _destructible: 0
   _canStopPlayer: 1
   _damageAmount: 0
+  _health: 0
 --- !u!1 &6322168177198161400
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,7 +624,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 3edfb2a489e7af94e8507b34e0626b39, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -695,5 +701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _causesDamage: 1
+  _destructible: 0
   _canStopPlayer: 0
   _damageAmount: 30
+  _health: 0
