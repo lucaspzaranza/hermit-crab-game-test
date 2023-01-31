@@ -45,10 +45,7 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         if(!MoveTiles)
-        {
-            _obstacleController.StopObstacles();
-            _floorController.StopScrolling();
-        }
+            StopTileMovement();
     }
 
     private void EventHandlerSetup()
@@ -62,6 +59,7 @@ public class GameController : MonoBehaviour
 
         TileCollisionDetector.OnTileDamagePlayer += DamagePlayer;
         TileCollisionDetector.OnTileStopPlayer += SetStopPlayer;
+        TileCollisionDetector.OnObstacleDestroyed += HandleOnObstacleDestroyed;
 
         ObstacleSpawnable.OnTileEnabled += HandleOnObstacleTileEnabled;
 
@@ -81,6 +79,7 @@ public class GameController : MonoBehaviour
 
         TileCollisionDetector.OnTileDamagePlayer -= DamagePlayer;
         TileCollisionDetector.OnTileStopPlayer -= SetStopPlayer;
+        TileCollisionDetector.OnObstacleDestroyed -= HandleOnObstacleDestroyed;
 
         ObstacleSpawnable.OnTileEnabled -= HandleOnObstacleTileEnabled;
 
@@ -113,9 +112,16 @@ public class GameController : MonoBehaviour
 
     private void GameOver()
     {
-        Time.timeScale = 0f;
-        PlayerInstance.gameObject.SetActive(false);
+        StopTileMovement();
+        _touchInputController.gameObject.SetActive(false);
+        PlayerInstance.GetComponent<Player>().enabled = false;
         UIController.SetGameOverActivation(true);
+    }
+
+    private void StopTileMovement()
+    {
+        _obstacleController.StopObstacles();
+        _floorController.StopScrolling();
     }
     
     private void DamagePlayer(int amount)
@@ -135,6 +141,11 @@ public class GameController : MonoBehaviour
     private void HandleOnObstacleTileEnabled(Transform obstacleTransform)
     {        
         _obstacleController.SpawnObstacle(obstacleTransform);
+    }
+
+    private void HandleOnObstacleDestroyed(GameObject obstacle)
+    {
+
     }
 
     private void HandleClickOrTouch()

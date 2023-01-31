@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d39784ba027c74dbdd611208d9ceba, type: 3}
   m_Name: Acid
   m_EditorClassIdentifier: 
-  _spawnPercentage: 0.05
+  _spawnPercentage: 0.1

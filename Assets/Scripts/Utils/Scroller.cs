@@ -7,7 +7,7 @@ public class Scroller : MonoBehaviour
     [SerializeField] private float _offsetRate;
     private Renderer _renderer;
 
-    private float _initialOffset;
+    private bool _stop;
 
     void Start()
     {
@@ -19,17 +19,19 @@ public class Scroller : MonoBehaviour
      
     void Update()
     {
+        if(_stop) 
+            return;
+
         _renderer.material.mainTextureOffset += new Vector2(_offsetRate * Time.deltaTime, 0f);
     }
 
     public void MoveOffset()
     {
-        _offsetRate = _initialOffset;
+        _stop = false;
     }
 
     public void StopOffset()
     {
-        _initialOffset = _offsetRate;
-        _offsetRate = 0f;
+        _stop = true;
     }
 }

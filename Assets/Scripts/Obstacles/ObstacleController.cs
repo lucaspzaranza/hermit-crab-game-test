@@ -9,6 +9,8 @@ public class ObstacleController : MonoBehaviour
     [Range(0, 100)]
     [SerializeField] private int _spawnPercentage;
 
+    private List<GameObject> _obstaclesInScene = new List<GameObject>();
+
     public void SpawnObstacle(Transform obstacleTransform)
     {
         int randomPercentage = Random.Range(0, 100);
@@ -18,6 +20,7 @@ public class ObstacleController : MonoBehaviour
         int randomIndex = Random.Range(0, _obstacles.Count);
         GameObject newObstacle = Instantiate(_obstacles[randomIndex], obstacleTransform.position, Quaternion.identity);
         newObstacle.transform.SetParent(_obstaclesParent, false);
+        _obstaclesInScene.Add(newObstacle);
 
         ObstacleTile tile = newObstacle.GetComponent<ObstacleTile>();
         if (tile)
@@ -37,9 +40,15 @@ public class ObstacleController : MonoBehaviour
 
     public void StopObstacles()
     {
-        foreach (var obstacle in _obstacles)
+        foreach (var obstacle in _obstaclesInScene)
         {
             obstacle.GetComponent<TileMover>().StopTile();
         }
+    }
+
+    public void RemoveObstacleFromList(GameObject obstacle)
+    {
+        _obstaclesInScene.Remove(obstacle);
+        Destroy(obstacle);
     }
 }

@@ -1671,7 +1671,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7771942259326487145, guid: db96cedbb176f1e4993201c9b51116c3, type: 3}
   m_PrefabInstance: {fileID: 76105934}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1725857017}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62e5149de2bb44041bb3d6088c886531, type: 3}
@@ -1873,6 +1873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _floorScrolling:
     _lastTile: {fileID: 1358424333}
+    _lastTileSibling: {fileID: 1725857017}
     _tileMovers:
     - {fileID: 1839076482}
     - {fileID: 1341839318}
@@ -2789,7 +2790,7 @@ MonoBehaviour:
   - {fileID: 2414197114627111581, guid: 0404fcaa38fb4dd44860faaa23340f9e, type: 3}
   - {fileID: 3820691958898046611, guid: 163a2eedb07de864d94865cf9533421c, type: 3}
   _obstaclesParent: {fileID: 1060623865}
-  _spawnPercentage: 30
+  _spawnPercentage: 40
 --- !u!1 &1185550710
 GameObject:
   m_ObjectHideFlags: 0
@@ -3847,6 +3848,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1711707187}
   m_CullTransparentMesh: 1
+--- !u!1 &1725857017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2237708972673945388, guid: db96cedbb176f1e4993201c9b51116c3, type: 3}
+  m_PrefabInstance: {fileID: 76105934}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1726720568 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7771942259326487145, guid: db96cedbb176f1e4993201c9b51116c3, type: 3}
@@ -4356,7 +4362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7767717918176e43871e3b09998591f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _causeDamage: 1
+  _causesDamage: 1
   _canStopPlayer: 0
   _damageAmount: 9999
 --- !u!1 &2107450006

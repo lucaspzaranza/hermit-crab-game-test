@@ -18,6 +18,9 @@ public class PlayerAnimatorHashes
 
     private int _dash = Animator.StringToHash("Dash");
     public int Dash => _dash;
+
+    private int _death = Animator.StringToHash("Death");
+    public int Death => _death;
 }
 
 public class Player : MonoBehaviour
@@ -121,12 +124,17 @@ public class Player : MonoBehaviour
         if(!_invincible)
         {
             _health = Mathf.Clamp(_health - amount, 0, MAX_HEALTH);
-            _blinker.Blink();
-            _invincible = true;
             if (_health > 0)
+            {
+                _blinker.Blink();
+                _invincible = true;
                 OnPlayerTookDamage?.Invoke(_health);
+            }
             else
+            {
                 OnPlayerDeath?.Invoke();
+                _anim.SetTrigger(_animHashes.Death);
+            }
         }
     }
 

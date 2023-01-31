@@ -7,11 +7,14 @@ using UnityEngine;
 public class FloorScrolling
 {
     [SerializeField] private GameObject _lastTile;
+    [SerializeField] private GameObject _lastTileSibling;
     [SerializeField] private List<TileMover> _tileMovers;
     [SerializeField] private List<Scroller> _BGScrollers;
 
     private float _offset;
     public float Offset => _offset;
+    public GameObject LastTile => _lastTile;
+    public GameObject LastTileSibling => _lastTileSibling;
 
     public void SetOffset(float value)
     {
@@ -25,6 +28,7 @@ public class FloorScrolling
         tile.transform.parent.position = new Vector2(
            newX, tile.transform.parent.position.y);
 
+        _lastTileSibling = _lastTile;
         _lastTile = tile.transform.parent.gameObject;
 
         tile.SetActive(false);

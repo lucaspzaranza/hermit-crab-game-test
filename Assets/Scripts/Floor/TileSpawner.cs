@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using Unity.Profiling;
 using UnityEngine;
 
@@ -34,31 +35,35 @@ public class TileSpawner
         }
     }
 
-    public void SpawnTile(GameObject tile)
+    public void SpawnTile(GameObject tile, GameObject lastTileSibling)
     {
-        bool currentTileCausesDamage = tile.GetComponent<TileCollisionDetector>().CauseDamage;
-        bool newTileCausesDamage = false;
-
         TileContainer container = tile.transform.parent.GetComponent<TileContainer>();
 
         int randomIndex = UnityEngine.Random.Range(0, MAX_LENGHT);
         int tileIndex = tilesIndexesByPercentage[randomIndex];
 
+        bool tileCausesDamage = container.Tiles[tileIndex].GetComponent<TileCollisionDetector>().CausesDamage;
+
         // Prevent the next tile to be a damage tile and turn the game
         // impossible to win. This will avoid two or more consecutives acid or spike tiles 
-        if (currentTileCausesDamage)  
+        if (tileCausesDamage)  
         {
-            newTileCausesDamage = container.Tiles[tileIndex].GetComponent<TileCollisionDetector>().CauseDamage;
-            while (newTileCausesDamage)
+            TileContainer siblingContainer = lastTileSibling.GetComponent<TileContainer>();
+
+            bool siblingTileCausesDamage = 
+                siblingContainer.Tiles[siblingContainer.SelectedChildIndex]
+                .GetComponent<TileCollisionDetector>().CausesDamage;
+
+            while (siblingTileCausesDamage && tileCausesDamage)
             {
                 randomIndex = UnityEngine.Random.Range(0, MAX_LENGHT);
                 tileIndex = tilesIndexesByPercentage[randomIndex];
 
-                newTileCausesDamage = container.Tiles[tileIndex].GetComponent<TileCollisionDetector>().CauseDamage;
+                tileCausesDamage = container.Tiles[tileIndex].GetComponent<TileCollisionDetector>().CausesDamage;
             }
         }
         
-
+        container.SetSelectedChildIndex(tileIndex);
         container.Tiles[tileIndex].SetActive(true);
     }
 }

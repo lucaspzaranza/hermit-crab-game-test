@@ -24,7 +24,7 @@ public class FloorController : MonoBehaviour
 
     public void SpawnNewTile(GameObject tile)
     {
-        _tileSpawner.SpawnTile(tile);
+        _tileSpawner.SpawnTile(tile, _floorScrolling.LastTileSibling);
     }
 
     public void SetSpriteRendererOffset(SpriteRenderer newSR)
